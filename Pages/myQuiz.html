@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>QuizUp</title>
+    <link rel="shortcut icon" href="../Images/Logo.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body class="dark_bg">
+    <nav class="navbar navbar-expand-lg">
+        <div class="NavbarInContainer container d-flex">
+            <a href="../index.html" class="navbar-brand d-flex align-items-center" id="navbarLogo"
+                class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                <img src="../Images/Logo.png" width="60" class="me-2">
+                <span class="fs-1 text-white">QuizUp</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
+                aria-label="Toggle navigation">
+                <span class="Header-Fixed-BG">
+                    <span class="Header-Hamburger navbar-toggler-icon"></span>
+                </span>
+            </button>
+            <div class="offcanvas offcanvas-end text-bg-dark bg-black pt-4 ps-3" tabindex="-1" id="offcanvasDarkNavbar"
+                aria-labelledby="offcanvasDarkNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="text-green offcanvas-title fs-7 Navigation letter-space-3" id="offcanvasDarkNavbarLabel">
+                        NAVIGATION MENU</h5>
+                    <button type="button" class="btn-close btn-close-white fs-7" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body d-lg-flex justify-content-end">
+                    <ul id="navbarUl" class="nav nav-pills fs-5 d-md-flex flex-md-column flex-lg-row">
+                        <li class="nav-item mx-1"><a href="../index.html"
+                                class="rounded-0 nav-link text-white hoverEffect">Home</a></li>
+                        <li class="nav-item mx-1"><a href="makeQuiz.html"
+                                class="rounded-0 nav-link text-white hoverEffect" aria-current="page">Make Your Quiz</a>
+                        </li>
+                        <li class="nav-item mx-1"><a href="" class="rounded-0 nav-link text-white navActiveLink">My
+                                Quizzes</a></li>
+                        <li>
+                            <div class="dropdown text-end">
+                                <a href="#"
+                                    class="specialLink rounded d-flex align-items-center p-2 gap-1 text-white d-block link-body-emphasis text-decoration-none dropdown-toggle"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="me-1 userNameSpan"></span>
+                                    <div class="profileImageDiv rounded-circle">
+                                        <img src="" alt="mdo" width="100%" height="" class="userProfilePicImg">
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu text-small">
+
+                                    <li onclick="signOut(event)"><a class="dropdown-item" href="">Sign out</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <main>
+        <div class="container mb-3 d-flex justify-content-between flex-column-reverse flex-md-row">
+            <a href="makeQuiz.html"
+                class="specialLink text-decoration-none rounded d-flex justify-content-center align-items-center">
+                <button class="btn btn-lg btn-success border-0 py-0 specialLink">Make a Quiz</button>
+            </a>
+            <span class="scoreSpan1 d-inline-block text-white mb-4">Total Quizzes Added: <span
+                    id="QAdded">0</span></span>
+        </div>
+        <div class="accordion accordionContainer container mb-5" id="accordionPanelsStayOpenExample">
+
+        </div>
+
+
+        <div class="quizContainer">
+            <div class="mainContainer">
+                <h1 id="mainHeading">Quiz App</h1>
+
+                <div class="scoreIndex">
+                    <h2>MCQs</h2><span class="scoreSpan">Score: <span id="marks">1</span> / <span
+                            id="marksEnd">0</span></span>
+                </div>
+
+                <div class="questionContainer">
+                    <span id="question"></span>
+                </div>
+
+                <div class="answersBtnContainer" id="answersBtnContainer"></div>
+
+                <div class="quizFooter">
+                    <span><span id="starting">1</span> of <span id="ending">0</span> Questions</span>
+                    <div>
+                        <button onclick="gotoHome()" id="goHomeBtn">Go back</button>
+                        <button onclick="next1()" id="nextBtn">Next</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="resultContainer">
+                <h2>Quiz Result!</h2>
+                <div class="marksContainer">
+                    <div id="percentContainer" class="percentContainer">
+                        <span id="percentSpan">0%</span>
+                    </div>
+
+                    <span id="resultMarksSpan">Your Score is: <span id="resultMarks">0</span> out of <span
+                            id="resultMarksEnd">0</span></span>
+                    <div class="resultButtonContainer">
+                        <button onclick="gotoHome()" id="goHomeBtn">Go back</button>
+                        <button onclick="tryAgain1()">Try Again</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal fade" id="modalContainer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div id="modalDialog" class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modalHeading"></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modalBody"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" id="modalButton"
+                        data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script type="module" src="myQuiz.js"></script>
+</body>
+
+</html>
