@@ -240,7 +240,6 @@ window.loginSignup = (order) => {
             var userNameInp = document.getElementById('floatingInputName');
             var userEmailInp = document.getElementById('floatingInputEmail');
             var userPasswordInp = document.getElementById('floatingPassword');
-            console.log(profileImageDownloadURL)
             if (profileImageDownloadURL == null) {
                 toastRed("Please upload an image")
                 return;
@@ -435,7 +434,6 @@ window.checkQuestion = (currentOption, correctAns, element) => {
     }
     if (currentOption == correctAns) {
         element.setAttribute('class', 'correct')
-        console.log(element);
         marks++;
     } else {
         element.setAttribute('class', 'wrong')

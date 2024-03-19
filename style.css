@@ -539,6 +539,12 @@
 }
 
 @media screen and (max-width: 991px) {
+    #navbarUl {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+    }
+
     .NavbarInContainer {
         flex-direction: row;
     }

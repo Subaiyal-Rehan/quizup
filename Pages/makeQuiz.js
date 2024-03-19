@@ -124,7 +124,6 @@ var index = 0;
 var marks = 0;
 
 var userDetailsObj = JSON.parse(localStorage.getItem('userDetails'));
-console.log(userDetailsObj)
 if (userDetailsObj == null || Object.keys(userDetailsObj).length === 0) {
     modalHeading.classList.add('text-danger')
     modalHeading.classList.remove('text-success')
@@ -183,7 +182,7 @@ let quizInputsArr = [];
 
 var style = 0;
 function transform() {
-    style = style + 334.5
+    style = style + 334.2
     return style;
 }
 
@@ -221,14 +220,8 @@ window.addAnotherQuestion = () => {
     <div>
         <span id="QuizMakeSpan-Invisible" class="text-white-50 mt-3">NOTE: Kindly ensure that one of the options provided represents the correct answer. This is crucial for the functionality and accuracy of your quiz.</span>
     </div>`;
-    // quizQnAContainer.innerHTML += newQuestion
-
-
     quizQnAContainer.style.transform = `translateY(-${transform()}px)`
 
-
-    // document.getElementById(`quiz${questionCounter}`).classList.remove("quizQNAInRight")
-    // document.getElementById(`quiz${questionCounter}`).classList.add("quizQNAInLeft")
     quizQnAContainer.insertAdjacentHTML('beforeend', newQuestion);
 }
 

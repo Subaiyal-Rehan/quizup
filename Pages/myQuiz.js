@@ -62,7 +62,6 @@ var totalQuestion = document.getElementById('ending');
 var nextBtn = document.getElementById('nextBtn');
 
 var userDetailsObj = JSON.parse(localStorage.getItem('userDetails'));
-console.log(userDetailsObj)
 if (userDetailsObj == null || Object.keys(userDetailsObj).length === 0) {
     modalHeading.classList.add('text-danger')
     modalHeading.classList.remove('text-success')
@@ -95,6 +94,14 @@ window.signOut = (e) => {
 
 var reference = ref(database, `Users/${userDetailsObj.id}/Quizzes/`)
 onValue(reference, (data) => {
+    if (!data.val()) {
+        accorContainer.innerHTML = `
+        <h2 class="text-white text-center mt-4">It seems like there are no quizzes added yet. Once you add them, they will appear here.</h2>
+        <a href="makeQuiz.html" class="text-decoration-none">
+            <button class="btn specialLink text-white btn-lg d-block m-auto">Add Your First Quiz</button>
+        </a>`;
+        return;
+    }
     var quizArr = Object.values(data.val());
     QAdded.innerHTML = quizArr.length;
     accorContainer.innerHTML = "";
@@ -157,18 +164,25 @@ onValue(reference, (data) => {
 })
 
 window.DeleteQuiz = (elem) => {
+    var modalFooter = document.querySelector('.modal-footer')
     modalHeading.classList.add('text-danger')
     modalHeading.classList.remove('text-success')
     modalHeading.innerHTML = `Confirm Quiz Deletion`
-    modalBody.innerHTML = "Are you sure you want to delete all of your tasks? This action cannot be undone."
-    modalBtn.classList.add("btn-danger")
-    modalBtn.classList.remove("btn-success")
-    modalBtn.innerHTML = "Yes"
+    modalBody.innerHTML = "Are you sure you want to delete this quiz? This action cannot be undone."
+    modalFooter.innerHTML = `
+    <button type="button" class="btn btn-danger" id="modalButton1"
+    data-bs-dismiss="modal">Yes, Delete!</button>
+    <button type="button" class="btn btn-success" id="modalButton2"
+    data-bs-dismiss="modal">No, Cancel!</button>`
     modalContainer.show();
     modalElement.addEventListener('hidden.bs.modal', () => {
         return;
     });
-    modalBtn.addEventListener('click', () => {
+    document.getElementById("modalButton2").addEventListener('click', () => {
+        modalContainer.hide();
+        return;
+    })
+    document.getElementById("modalButton1").addEventListener('click', () => {
         var reference1 = ref(database, `Users/${userDetailsObj.id}/Quizzes/${elem.id}`);
         remove(reference1).then(() => {
             toastGreen("Quiz Successfully Deleted!")
